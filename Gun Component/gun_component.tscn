@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmygasw6p144p"]
+
+[ext_resource type="Script" path="res://scripts/game_objects/components/gun_component.gd" id="1_e141f"]
+[ext_resource type="SpriteFrames" uid="uid://dxmshv8wylbr2" path="res://assets/textures/weapons/weapons/assault_rifle.tres" id="2_jx67c"]
+
+[node name="GunComponent" type="Node2D"]
+script = ExtResource("1_e141f")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(18, -18)
+scale = Vector2(5.875, 6.25)
+sprite_frames = ExtResource("2_jx67c")
+
+[node name="Muzzle" type="Marker2D" parent="."]
+visible = false
+position = Vector2(58, -21)
+rotation = -1.5708
+scale = Vector2(1, 1)
