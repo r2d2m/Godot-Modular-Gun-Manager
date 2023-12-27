@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="BasicWeapon" load_steps=7 format=3 uid="uid://ms3sf0sc3ylt"]
+
+[ext_resource type="Script" path="res://scripts/attack_instance.gd" id="1_j1imf"]
+[ext_resource type="PackedScene" uid="uid://rohwjlxdmef2" path="res://scenes/projectile.tscn" id="2_rbksm"]
+[ext_resource type="SpriteFrames" uid="uid://b0obkvyevehh2" path="res://assets/projectiles/basic_bullet.tres" id="3_v1x0r"]
+[ext_resource type="Script" path="res://scripts/weapons_scripts/basic_weapon.gd" id="4_1e236"]
+[ext_resource type="SpriteFrames" uid="uid://dd255byaahgir" path="res://assets/weapon_sprite/assault_rifle.tres" id="5_480x8"]
+
+[sub_resource type="Resource" id="Resource_hudee"]
+script = ExtResource("1_j1imf")
+initial_damage = 0.0
+stun_time = 0.0
+linger_damage = 0.0
+linger_lenght = 0.0
+
+[resource]
+script = ExtResource("4_1e236")
+weapon_name = "Test Weapon"
+weapon_type = ""
+ammo_type = "light"
+weapon_sprite = ExtResource("5_480x8")
+weapon_color = Color(1, 1, 1, 1)
+sparks_enabled = true
+spark_color = Color(0.988, 0.749, 0.333, 1)
+firerate = 1.0
+clip_size = 1000
+reload_time = 2.0
+recoil = 0.0
+projectile_scene = ExtResource("2_rbksm")
+projectile_sprite = ExtResource("3_v1x0r")
+projectile_color = Color(1, 1, 1, 1)
+projectile_scale = 1.0
+projectile_speed = 75000.0
+projectile_lifespan = 10.0
+attack_instance = SubResource("Resource_hudee")
