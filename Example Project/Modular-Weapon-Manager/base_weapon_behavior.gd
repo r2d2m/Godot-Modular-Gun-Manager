@@ -9,9 +9,6 @@ class_name WeaponBehavior
 
 @export_category("Visuals")
 @export var weapon_sprite: SpriteFrames
-@export var weapon_color: Color = Color(1, 1, 1)
-@export var sparks_enabled: bool = true
-@export var spark_color: Color = Color(0.988, 0.749, 0.333)
 
 @export_category("Weapon Specifications")
 @export var firerate: float = 1.0
@@ -22,13 +19,17 @@ class_name WeaponBehavior
 @export_category("Projectile Specifications")
 @export var projectile_scene: PackedScene
 @export var projectile_sprite: SpriteFrames
-@export var projectile_color: Color = Color(1, 1, 1)
 @export var projectile_scale: float = 1.0
 @export var projectile_speed: float = 75000
 @export var projectile_lifespan: float = 10.0
 
 @export_category("Damage Specifications")
 @export var attack_instance: AttackInstance
+
+@export_category("Sparks")
+@export var sparks_enabled: bool = true
+@export var spark_color: Color = Color(0.988, 0.749, 0.333)
+@export var spark_sprite: Texture
 
 var can_shoot: bool = true
 
