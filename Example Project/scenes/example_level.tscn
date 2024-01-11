@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/example_level.gd" id="1_lke45"]
 [ext_resource type="Texture2D" uid="uid://bc8wd8ufv04hj" path="res://icon.svg" id="2_qdkly"]
 [ext_resource type="PackedScene" uid="uid://bmygasw6p144p" path="res://Modular-Weapon-Manager/gun_component/gun_component.tscn" id="3_jeos8"]
-[ext_resource type="Resource" uid="uid://d0jx705secuct" path="res://example_weapons/assault_rifle.tres" id="4_es8la"]
+[ext_resource type="Resource" uid="uid://d0jx705secuct" path="res://example_weapons/assault_rifle.tres" id="4_5tupq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iplmr"]
 
@@ -28,10 +28,9 @@ shape = SubResource("RectangleShape2D_iplmr")
 
 [node name="GunComponent" parent="CharacterBody2D/Hip" node_paths=PackedStringArray("weapon_host") instance=ExtResource("3_jeos8")]
 position = Vector2(80.377, 0)
-weapon_behavior = ExtResource("4_es8la")
+weapon_behavior = ExtResource("4_5tupq")
 weapon_host = NodePath("../..")
-ammo_types = {
-"heavy": 10000,
-"light": 10000,
-"shotgun": 10000
-}
+can_shoot = null
+can_reload = null
+ammo_in_clip = null
+stored_ammo_types = null

@@ -4,11 +4,7 @@ class_name WeaponBehavior
 
 @export_category("General Settings")
 @export var weapon_name: String
-@export var weapon_type: String
 @export var ammo_type: String
-
-@export_category("Visuals")
-@export var weapon_sprite: SpriteFrames
 
 @export_category("Weapon Specifications")
 @export var firerate: float = 1.0
@@ -18,79 +14,82 @@ class_name WeaponBehavior
 
 @export_category("Projectile Specifications")
 @export var projectile_scene: PackedScene
-@export var projectile_sprite: SpriteFrames
 @export var projectile_scale: float = 1.0
 @export var projectile_speed: float = 75000
-@export var projectile_lifespan: float = 10.0
 
 @export_category("Damage Specifications")
 @export var attack_instance: AttackInstance
 
-@export_category("Sparks")
-@export var sparks_enabled: bool = true
-@export var spark_color: Color = Color(0.988, 0.749, 0.333)
-@export var spark_sprite: Texture
 
-var can_shoot: bool = true
 
-func behavior_shooting_method(_origin: GunComponent, _projectile_position: Vector2, _projectile_rotation: float): 
+func custom_shoot():
 	
 	# When creating a gun type, enter how the firing logic (Like spread for a shotgun) in this function.
 	
 	pass
 
+func custom_shoot_failed():
+	
+	# Calls when shooting lacks ammunition
+	
+	pass
 
+func custom_reload_begin():
+	
+	# Calls at the beginning of a reload
+	
+	pass
 
-func shoot(origin: GunComponent, projectile_position: Vector2, projectile_rotation: float, _delta: float): # Call this method to perfom shooting
-	if can_shoot:
-		can_shoot = false
-		
-		behavior_shooting_method(origin, projectile_position, projectile_rotation)
-		
-		# Apply Recoil
-		if origin.weapon_host is CharacterBody2D:
-			origin.weapon_host.velocity += Vector2(-recoil, 0).rotated(projectile_rotation) * _delta
-		
-		# Take Ammo
-		origin.ammo_in_clip -= 1
-		
-		
-		await origin.get_tree().create_timer(firerate).timeout # Firerate
-		
-		can_shoot = true
-		origin.can_shoot = true
+func custom_reload_end():
+	
+	# Calls at the end of a reload
+	
+	pass
 
-func reload(origin: GunComponent): # Call this method for weapon reload
+func custom_reload_failed():
 	
-	if origin.ammo_types[self.ammo_type] <= 0: # If no ammo left
-		return false
+	# Calls when reload lacks ammunition
 	
-	origin.can_shoot = false
-	origin.can_reload = false
+	pass
+
+func custom_destroy_weapon():
 	
-	await origin.get_tree().create_timer(reload_time).timeout
+	# Calls before destroying an old weapon
 	
-	origin.ammo_types[self.ammo_type] += origin.ammo_in_clip
-	origin.ammo_in_clip = 0 # Empty existing clip
+	pass
+
+func custom_load_weapon():
 	
+	# Calls after loading a new weapon 
 	
-	if origin.ammo_types[self.ammo_type] >= clip_size: # If weapon can be fully loaded
-		origin.ammo_types[self.ammo_type] -= clip_size
-		origin.ammo_in_clip = clip_size
-		
-	elif origin.ammo_types[self.ammo_type] < clip_size and origin.ammo_types[self.ammo_type] > 0: # If weapon can be partially loaded
-		origin.ammo_in_clip = origin.ammo_types[self.ammo_type]
-		origin.ammo_types[self.ammo_type] = 0
-	
-	origin.can_shoot = true
-	origin.can_reload = true
-	
-	return true
+	pass
 
 
 
 
-func spawn_projectile(origin: GunComponent, projectile_position: Vector2, projectile_rotation: float):
+
+
+func shoot(_origin: Node2D, _projectile_position: Vector2, _projectile_rotation: float): 
+	custom_shoot()
+
+func get_reload_info(ammo_in_clip: int, max_ammo_in_clip: int, ammo_stocked: int): # Calls to get specifications of weapon reload
+	
+	var ammo_pool = ammo_stocked + ammo_in_clip # Combines all ammo together.
+	
+	if ammo_stocked <= 0 or ammo_in_clip >= max_ammo_in_clip: # If no more ammo left OR clip already full (So no reload
+		return {"can_reload": false, "ammo_in_clip": ammo_in_clip, "ammo_stocked": ammo_stocked}
+		
+	elif ammo_pool >= max_ammo_in_clip: # Full reload
+		return {"can_reload": true, "ammo_in_clip": max_ammo_in_clip, "ammo_stocked": ammo_pool - max_ammo_in_clip}
+		
+	elif ammo_pool >= 1 and ammo_pool < max_ammo_in_clip: # Partial reload
+		return {"can_reload": true, "ammo_in_clip": ammo_pool, "ammo_stocked": 0}
+		
+	else: # Error or unexpected situation, keep as is.
+		return {"can_reload": false, "ammo_in_clip": ammo_in_clip, "ammo_stocked": ammo_stocked}
+
+
+func spawn_projectile(origin: Node2D, projectile_position: Vector2, projectile_rotation: float):
 	
 	var projectile_instance = projectile_scene.instantiate()
 	

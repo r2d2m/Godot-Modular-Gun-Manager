@@ -1,67 +1,148 @@
 extends Node2D
-class_name GunComponent
+class_name GunComponent2D
 
+@export_category("General Settings")
 @export var weapon_behavior: WeaponBehavior
 @export var weapon_host: Node2D # The node taht uses the component (Ex: The Player Character)
+@export var muzzle_position: Vector2
 
+@export_category("Active Settings")
 @export var can_shoot: bool = true
 @export var can_reload: bool = true
 
+@export_category("Ammunition Settings")
+@export var use_ammo: bool = true
 @export var ammo_in_clip: int
-@export var ammo_types: Dictionary = {
-	"light": 0,
-	"heavy": 0,
-	"shotgun": 0
-	# Add the ammo types you wish to use
+@export var stored_ammo_types: Dictionary = {
+	# Add the ammo types you wish to use, all values must be intergers
 }
 
-@onready var muzzle: Marker2D = $Gun/Muzzle
-@onready var particles: GPUParticles2D = $Gun/Muzzle/GPUParticles2D
-@onready var sprite: AnimatedSprite2D = $Gun/Sprite
-@onready var animator: AnimationPlayer = $AnimationPlayer
+@onready var ReloadTimer: Timer = $ReloadTimer
+@onready var FirerateTimer: Timer = $FirerateTimer
 
-@onready var up_point: Marker2D = $UpPoint
 
-func _ready() -> void:
-	load_weapon(weapon_behavior)
 
-func shoot_weapon(_delta: float):
-	if ammo_in_clip > 0:
-		weapon_behavior.shoot(self, muzzle.global_position, global_rotation, _delta)
+func custom_shoot():
+	
+	# Calls on shoot
+	
+	pass
+
+func custom_shoot_failed():
+	
+	# Calls when shooting lacks ammunition
+	
+	pass
+
+func custom_reload_begin():
+	
+	# Calls at the beginning of a reload
+	
+	pass
+
+func custom_reload_end():
+	
+	# Calls at the end of a reload
+	
+	pass
+
+func custom_reload_failed():
+	
+	# Calls when reload lacks ammunition
+	
+	pass
+
+func custom_destroy_weapon():
+	
+	# Calls before destroying an old weapon
+	
+	pass
+
+func custom_load_weapon():
+	
+	# Calls after loading a new weapon 
+	
+	pass
+
+
+
+
+
+# Shooting
+
+var is_shooting: bool = false
+
+func shoot_weapon():
+	if weapon_behavior and weapon_host and can_shoot and !is_shooting and !is_reloading:
 		
-		if can_shoot:
-			can_shoot = false
-			animator.stop()
-			particles.restart()
-			animator.play("fire")
+		if ammo_in_clip > 0 or !use_ammo:
+			if use_ammo:
+				ammo_in_clip -= 1
+			
+			is_shooting = true
+			
+			weapon_behavior.shoot(self, muzzle_position, global_rotation)
+			custom_shoot()
+			
+			FirerateTimer.start(weapon_behavior.firerate)
+			
+		else: # Not enough ammunition to shoot
+			
+			custom_shoot_failed()
+			weapon_behavior.custom_shoot_failed()
+			
+
+func _on_firerate_timer_timeout() -> void:
+	if is_shooting:
+		is_shooting = false
+
+
+# Reloading
+
+var is_reloading: bool = false
 
 func reload_weapon():
-	if ammo_in_clip < weapon_behavior.clip_size and can_reload:
+	if weapon_behavior and weapon_host and use_ammo and can_reload and !is_shooting and !is_reloading: # Checks if reload is currently allowed
 		
-		can_reload = false
-		weapon_behavior.reload(self)
+		var reload_info: Dictionary = weapon_behavior.get_reload_info(ammo_in_clip, weapon_behavior.clip_size, stored_ammo_types[weapon_behavior.ammo_type])
 		
-		particles.restart()
-		animator.stop()
-		animator.play("reload_start")
-		await get_tree().create_timer(weapon_behavior.reload_time - 0.4).timeout
-		animator.play("reload_end")
+		if reload_info["can_reload"] and stored_ammo_types.has(weapon_behavior.ammo_type) or !use_ammo: # Checks if component has sufficient ammunition
+			
+			is_reloading = true
+			
+			custom_reload_begin()
+			weapon_behavior.custom_reload_begin()
+			ReloadTimer.start(weapon_behavior.reload_time)
+			
+		else: # Fails reload in not enough ammunition
+			
+			custom_reload_failed()
+			weapon_behavior.custom_reload_failed()
+			
+
+func _on_reload_timer_timeout() -> void:
+	if is_reloading: # Finish the reload
+		var reload_info: Dictionary = weapon_behavior.get_reload_info(ammo_in_clip, weapon_behavior.clip_size, stored_ammo_types[weapon_behavior.ammo_type])
+		
+		ammo_in_clip = reload_info["ammo_in_clip"]
+		stored_ammo_types[weapon_behavior.ammo_type] = reload_info["ammo_stocked"]
+		
+		custom_reload_end()
+		weapon_behavior.custom_reload_end()
+		
+		is_reloading = false
+
+
+# Weapon Loading
 
 func load_weapon(new_weapon: WeaponBehavior):
+	custom_destroy_weapon()
+	weapon_behavior = new_weapon
 	
-	weapon_behavior = new_weapon # Loads new weapon
-	ammo_in_clip = weapon_behavior.clip_size 
+	is_shooting = false
+	is_reloading = false
 	
-	sprite.sprite_frames = weapon_behavior.weapon_sprite
+	FirerateTimer.stop()
+	ReloadTimer.stop()
 	
-	particles.texture = weapon_behavior.spark_sprite
-	particles.visible = weapon_behavior.sparks_enabled
-	particles.modulate = weapon_behavior.spark_color
-	
-	muzzle.position.x = sprite.sprite_frames.get_frame_texture("default", 0).get_width() * 3 # Adjusts the muzzle to the end of the sprite
-
-func _process(delta: float) -> void:
-	if up_point.global_position.y - global_position.y < 0:
-		sprite.flip_v = false
-	else:
-		sprite.flip_v = true
+	custom_load_weapon()
