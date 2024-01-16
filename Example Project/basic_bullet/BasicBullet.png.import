@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crrc0cgn3qjdv"
-path="res://.godot/imported/WhiteSquare.jpg-5ccb850cd86568c1b1dab5861effac2b.ctex"
+uid="uid://djyu6on62vy2k"
+path="res://.godot/imported/BasicBullet.png-73a3d30b77c93a27051c5df382f56c38.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/weapons/WhiteSquare.jpg"
-dest_files=["res://.godot/imported/WhiteSquare.jpg-5ccb850cd86568c1b1dab5861effac2b.ctex"]
+source_file="res://basic_bullet/BasicBullet.png"
+dest_files=["res://.godot/imported/BasicBullet.png-73a3d30b77c93a27051c5df382f56c38.ctex"]
 
 [params]
 

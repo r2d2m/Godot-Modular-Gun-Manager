@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djyu6on62vy2k"
-path="res://.godot/imported/BasicBullet.png-f86d3fd9b7e181ff8b655f0c7ae99675.ctex"
+uid="uid://jt8u18mjdtm8"
+path="res://.godot/imported/AssaultRifle.png-3fcf4bf285a2a2ed5c7a9dedd5db3fdc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/projectiles/BasicBullet.png"
-dest_files=["res://.godot/imported/BasicBullet.png-f86d3fd9b7e181ff8b655f0c7ae99675.ctex"]
+source_file="res://assets/AssaultRifle.png"
+dest_files=["res://.godot/imported/AssaultRifle.png-3fcf4bf285a2a2ed5c7a9dedd5db3fdc.ctex"]
 
 [params]
 

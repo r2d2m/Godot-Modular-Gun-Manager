@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="TopDownBasicWeapon" load_steps=4 format=3 uid="uid://ch8t0j4stiyq6"]
+
+[ext_resource type="Script" path="res://Modular-Weapon-Manager/prebuilt_weapons_types/top_down_weapon/behaviour/top_down_basic.gd" id="1_iat4e"]
+[ext_resource type="PackedScene" uid="uid://rohwjlxdmef2" path="res://basic_bullet/projectile.tscn" id="1_ww675"]
+[ext_resource type="SpriteFrames" uid="uid://dd255byaahgir" path="res://assets/assault_rifle.tres" id="3_8t78y"]
+
+[resource]
+script = ExtResource("1_iat4e")
+weapon_sprite = ExtResource("3_8t78y")
+animate_sprite_actions = true
+auto_flip_sprite = true
+sparks_enabled = true
+sparks_modulate = Color(0.988, 0.749, 0.333, 1)
+weapon_name = "assault_rifle"
+ammo_type = ""
+firerate = 0.2
+clip_size = 25
+reload_time = 10.0
+recoil = 0.0
+projectile_scene = ExtResource("1_ww675")
+projectile_scale = 1.0
+projectile_speed = 75000.0
+projectile_range = 1000.0

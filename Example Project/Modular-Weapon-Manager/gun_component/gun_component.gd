@@ -17,10 +17,6 @@ class_name GunComponent2D
 	# Add the ammo types you wish to use, all values must be intergers
 }
 
-@onready var ReloadTimer: Timer = $ReloadTimer
-@onready var FirerateTimer: Timer = $FirerateTimer
-
-
 
 func custom_shoot():
 	
@@ -64,6 +60,17 @@ func custom_load_weapon():
 	
 	pass
 
+func custom_ready():
+	
+	# Calls on ready
+	
+	pass
+
+func custom_process(_delta: float):
+	
+	# Calls every frame
+	
+	pass
 
 
 
@@ -71,6 +78,16 @@ func custom_load_weapon():
 # Shooting
 
 var is_shooting: bool = false
+
+func _ready() -> void:
+	
+	custom_ready()
+	
+	if weapon_behavior: # Loads initial weapon
+		load_weapon(weapon_behavior)
+
+func _process(_delta: float) -> void:
+	custom_process(_delta)
 
 func shoot_weapon():
 	if weapon_behavior and weapon_host and can_shoot and !is_shooting and !is_reloading:
@@ -84,17 +101,15 @@ func shoot_weapon():
 			weapon_behavior.shoot(self, muzzle_position, global_rotation)
 			custom_shoot()
 			
-			FirerateTimer.start(weapon_behavior.firerate)
+			await get_tree().create_timer(weapon_behavior.firerate).timeout
+			if is_shooting:
+				is_shooting = false
 			
 		else: # Not enough ammunition to shoot
 			
 			custom_shoot_failed()
 			weapon_behavior.custom_shoot_failed()
 			
-
-func _on_firerate_timer_timeout() -> void:
-	if is_shooting:
-		is_shooting = false
 
 
 # Reloading
@@ -112,13 +127,13 @@ func reload_weapon():
 			
 			custom_reload_begin()
 			weapon_behavior.custom_reload_begin()
-			ReloadTimer.start(weapon_behavior.reload_time)
+			await get_tree().create_timer(weapon_behavior.reload_time).timeout
+			_on_reload_timer_timeout()
 			
 		else: # Fails reload in not enough ammunition
 			
-			custom_reload_failed()
 			weapon_behavior.custom_reload_failed()
-			
+			custom_reload_failed()
 
 func _on_reload_timer_timeout() -> void:
 	if is_reloading: # Finish the reload
@@ -141,8 +156,5 @@ func load_weapon(new_weapon: WeaponBehavior):
 	
 	is_shooting = false
 	is_reloading = false
-	
-	FirerateTimer.stop()
-	ReloadTimer.stop()
 	
 	custom_load_weapon()

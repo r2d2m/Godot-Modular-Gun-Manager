@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://ci6buuforbild"]
+
+[ext_resource type="Script" path="res://example_level/example_level.gd" id="1_6xg4l"]
+[ext_resource type="Texture2D" uid="uid://bc8wd8ufv04hj" path="res://icon.svg" id="2_u2t5h"]
+[ext_resource type="PackedScene" uid="uid://wum0cxtnqot2" path="res://Modular-Weapon-Manager/prebuilt_weapons_types/top_down_weapon/component/top_down_gun_2d.tscn" id="3_058iy"]
+[ext_resource type="Resource" uid="uid://ch8t0j4stiyq6" path="res://example_weapons/top_down_weapons/assault_rifle.tres" id="4_oc285"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iplmr"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_6xg4l")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(590.623, 338.823)
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+z_index = -1
+position = Vector2(0.377016, 0.177009)
+rotation = -0.00331168
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("2_u2t5h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+visible = false
+shape = SubResource("RectangleShape2D_iplmr")
+
+[node name="Hip" type="Node2D" parent="CharacterBody2D"]
+
+[node name="TopDownGun2D" parent="CharacterBody2D/Hip" node_paths=PackedStringArray("weapon_host") instance=ExtResource("3_058iy")]
+position = Vector2(103.377, -0.822998)
+weapon_behavior = ExtResource("4_oc285")
+weapon_host = NodePath("../..")
+use_ammo = false

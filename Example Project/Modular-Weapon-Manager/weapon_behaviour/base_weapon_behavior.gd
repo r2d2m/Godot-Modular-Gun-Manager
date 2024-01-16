@@ -15,7 +15,8 @@ class_name WeaponBehavior
 @export_category("Projectile Specifications")
 @export var projectile_scene: PackedScene
 @export var projectile_scale: float = 1.0
-@export var projectile_speed: float = 75000
+@export var projectile_speed: float = 75000.0
+@export var projectile_range: float = 1000.0
 
 @export_category("Damage Specifications")
 @export var attack_instance: AttackInstance
@@ -93,7 +94,9 @@ func spawn_projectile(origin: Node2D, projectile_position: Vector2, projectile_r
 	
 	var projectile_instance = projectile_scene.instantiate()
 	
-	projectile_instance.weapon_behavior = self
+	if projectile_instance is Projectile:
+		projectile_instance.weapon_behavior = self
+	
 	projectile_instance.global_position = projectile_position
 	projectile_instance.rotation = projectile_rotation
 	

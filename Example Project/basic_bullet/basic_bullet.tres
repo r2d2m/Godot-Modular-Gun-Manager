@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://b0obkvyevehh2"]
 
-[ext_resource type="Texture2D" uid="uid://djyu6on62vy2k" path="res://assets/projectiles/BasicBullet.png" id="1_a6u8b"]
+[ext_resource type="Texture2D" uid="uid://djyu6on62vy2k" path="res://basic_bullet/BasicBullet.png" id="1_a6u8b"]
 
 [resource]
 animations = [{
