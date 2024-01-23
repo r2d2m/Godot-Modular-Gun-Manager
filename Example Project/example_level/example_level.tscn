@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://example_level/example_level.gd" id="1_6xg4l"]
 [ext_resource type="Texture2D" uid="uid://bc8wd8ufv04hj" path="res://icon.svg" id="2_u2t5h"]
 [ext_resource type="PackedScene" uid="uid://wum0cxtnqot2" path="res://Modular-Weapon-Manager/prebuilt_weapons_types/top_down_weapon/component/top_down_gun_2d.tscn" id="3_058iy"]
-[ext_resource type="Resource" uid="uid://ch8t0j4stiyq6" path="res://example_weapons/top_down_weapons/assault_rifle.tres" id="4_oc285"]
+[ext_resource type="Resource" uid="uid://bnxi4gg8x4u4a" path="res://example_weapons/top_down_weapons/sniper_rifle.tres" id="4_5co62"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iplmr"]
 
@@ -28,7 +28,7 @@ shape = SubResource("RectangleShape2D_iplmr")
 
 [node name="TopDownGun2D" parent="CharacterBody2D/Hip" node_paths=PackedStringArray("weapon_host") instance=ExtResource("3_058iy")]
 position = Vector2(103.377, -0.822998)
-weapon_behavior = ExtResource("4_oc285")
+weapon_behavior = ExtResource("4_5co62")
 weapon_host = NodePath("../..")
 stored_ammo_types = {
 "light": 10000

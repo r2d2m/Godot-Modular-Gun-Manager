@@ -174,7 +174,6 @@ libraries = {
 [node name="Gun" type="Node2D" parent="."]
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Gun"]
-rotation = -6.28319
 scale = Vector2(6, 6)
 sprite_frames = ExtResource("2_06t7n")
 

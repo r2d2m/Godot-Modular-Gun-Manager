@@ -16,7 +16,7 @@ class_name WeaponBehavior
 @export var projectile_scene: PackedScene
 @export var projectile_scale: float = 1.0
 @export var projectile_speed: float = 75000.0
-@export var projectile_range: float = 1000.0
+@export var projectile_range: float = 100000.0
 
 @export_category("Damage Specifications")
 @export var attack_instance: AttackInstance

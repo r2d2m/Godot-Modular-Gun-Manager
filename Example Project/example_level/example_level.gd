@@ -10,3 +10,4 @@ func _process(delta: float) -> void:
 		gun.shoot_weapon()
 	elif Input.is_action_just_pressed("reload"):
 		gun.reload_weapon()
+	
