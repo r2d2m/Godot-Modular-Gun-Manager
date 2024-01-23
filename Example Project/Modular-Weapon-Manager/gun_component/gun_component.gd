@@ -6,7 +6,7 @@ class_name GunComponent2D
 @export var weapon_host: Node2D # The node taht uses the component (Ex: The Player Character)
 @export var muzzle_position: Vector2
 
-@export_category("Active Settings")
+@export_category("Active Settings") # These are meant to be controlled by others nodes in the scene (Like the main game script)
 @export var can_shoot: bool = true
 @export var can_reload: bool = true
 
@@ -77,7 +77,7 @@ func custom_process(_delta: float):
 
 # Shooting
 
-var is_shooting: bool = false
+var is_shooting: bool = false # Controlled internally, do not override
 
 func _ready() -> void:
 	
@@ -90,10 +90,12 @@ func _process(_delta: float) -> void:
 	custom_process(_delta)
 
 func shoot_weapon():
-	if weapon_behavior and weapon_host and can_shoot and !is_shooting and !is_reloading:
+	
+	if weapon_behavior and weapon_host and can_shoot and !is_shooting and !is_reloading: # Check if shoot is possible
 		
-		if ammo_in_clip > 0 or !use_ammo:
-			if use_ammo:
+		if ammo_in_clip > 0 or !use_ammo: # Check ammunition
+			
+			if use_ammo: # Remove Ammo
 				ammo_in_clip -= 1
 			
 			is_shooting = true
@@ -153,6 +155,8 @@ func _on_reload_timer_timeout() -> void:
 func load_weapon(new_weapon: WeaponBehavior):
 	custom_destroy_weapon()
 	weapon_behavior = new_weapon
+	
+	ammo_in_clip = weapon_behavior.clip_size
 	
 	is_shooting = false
 	is_reloading = false

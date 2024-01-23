@@ -22,10 +22,9 @@ func custom_load_weapon():
 		particles.modulate = weapon_behavior.sparks_modulate
 		
 		muzzle.position.x = sprite.sprite_frames.get_frame_texture("default", 0).get_width() * 3 # Adjusts the muzzle to the end of the sprite
-		muzzle_position = muzzle.position
 
 
-func custom_shoot_weapon():
+func custom_shoot():
 	if weapon_behavior is TopDownWeaponBehavior:
 		
 		if weapon_behavior.sparks_enabled:
@@ -51,4 +50,6 @@ func _process(_delta: float) -> void:
 			sprite.flip_v = false
 		elif weapon_behavior.auto_flip_sprite:
 			sprite.flip_v = true
+		
+		muzzle_position = muzzle.global_position
 		

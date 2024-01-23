@@ -30,4 +30,6 @@ shape = SubResource("RectangleShape2D_iplmr")
 position = Vector2(103.377, -0.822998)
 weapon_behavior = ExtResource("4_oc285")
 weapon_host = NodePath("../..")
-use_ammo = false
+stored_ammo_types = {
+"light": 10000
+}

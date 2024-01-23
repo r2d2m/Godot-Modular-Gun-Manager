@@ -23,7 +23,7 @@ class_name WeaponBehavior
 
 
 
-func custom_shoot():
+func custom_shoot(_origin: Node2D, _projectile_position: Vector2, _projectile_rotation: float):
 	
 	# When creating a gun type, enter how the firing logic (Like spread for a shotgun) in this function.
 	
@@ -71,7 +71,7 @@ func custom_load_weapon():
 
 
 func shoot(_origin: Node2D, _projectile_position: Vector2, _projectile_rotation: float): 
-	custom_shoot()
+	custom_shoot(_origin, _projectile_position, _projectile_rotation)
 
 func get_reload_info(ammo_in_clip: int, max_ammo_in_clip: int, ammo_stocked: int): # Calls to get specifications of weapon reload
 	
