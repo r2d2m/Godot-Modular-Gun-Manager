@@ -1,11 +1,37 @@
-[gd_scene load_steps=6 format=3 uid="uid://ci6buuforbild"]
+[gd_scene load_steps=9 format=3 uid="uid://ci6buuforbild"]
 
 [ext_resource type="Script" path="res://example_level/example_level.gd" id="1_6xg4l"]
 [ext_resource type="Texture2D" uid="uid://bc8wd8ufv04hj" path="res://icon.svg" id="2_u2t5h"]
 [ext_resource type="PackedScene" uid="uid://wum0cxtnqot2" path="res://Modular-Weapon-Manager/prebuilt_weapons_types/top_down_weapon/component/top_down_gun_2d.tscn" id="3_058iy"]
-[ext_resource type="Resource" uid="uid://bnxi4gg8x4u4a" path="res://example_weapons/top_down_weapons/sniper_rifle.tres" id="4_5co62"]
+[ext_resource type="PackedScene" uid="uid://rohwjlxdmef2" path="res://basic_bullet/projectile.tscn" id="4_nkpi7"]
+[ext_resource type="SpriteFrames" uid="uid://dd255byaahgir" path="res://assets/assault_rifle.tres" id="5_7g753"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iplmr"]
+
+[sub_resource type="GDScript" id="GDScript_kqub5"]
+script/source = "extends TopDownWeaponBehavior
+class_name TopDownBasicWeapon"
+
+[sub_resource type="Resource" id="Resource_a8ymk"]
+script = SubResource("GDScript_kqub5")
+weapon_sprite = ExtResource("5_7g753")
+animate_sprite_actions = true
+auto_flip_sprite = true
+sparks_enabled = true
+sparks_modulate = Color(0.988, 0.749, 0.333, 1)
+weapon_name = "assault_rifle"
+firerate = 0.2
+recoil = 0.0
+ammo_type = "light"
+clip_size = 25
+reload_time = 3.0
+projectile_scene = ExtResource("4_nkpi7")
+projectile_scale = 1.0
+projectile_speed = 75000.0
+projectile_range = 100000.0
+consistent_spread = false
+spread_range = 0.0
+projectile_quantity = 1
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_6xg4l")
@@ -28,7 +54,7 @@ shape = SubResource("RectangleShape2D_iplmr")
 
 [node name="TopDownGun2D" parent="CharacterBody2D/Hip" node_paths=PackedStringArray("weapon_host") instance=ExtResource("3_058iy")]
 position = Vector2(103.377, -0.822998)
-weapon_behavior = ExtResource("4_5co62")
+weapon_behavior = SubResource("Resource_a8ymk")
 weapon_host = NodePath("../..")
 stored_ammo_types = {
 "light": 10000

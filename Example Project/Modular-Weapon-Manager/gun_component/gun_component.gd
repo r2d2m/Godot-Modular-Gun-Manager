@@ -110,7 +110,6 @@ func shoot_weapon():
 		else: # Not enough ammunition to shoot
 			
 			custom_shoot_failed()
-			weapon_behavior.custom_shoot_failed()
 			
 
 
@@ -128,13 +127,11 @@ func reload_weapon():
 			is_reloading = true
 			
 			custom_reload_begin()
-			weapon_behavior.custom_reload_begin()
 			await get_tree().create_timer(weapon_behavior.reload_time).timeout
 			_on_reload_timer_timeout()
 			
 		else: # Fails reload in not enough ammunition
 			
-			weapon_behavior.custom_reload_failed()
 			custom_reload_failed()
 
 func _on_reload_timer_timeout() -> void:
@@ -145,7 +142,6 @@ func _on_reload_timer_timeout() -> void:
 		stored_ammo_types[weapon_behavior.ammo_type] = reload_info["ammo_stocked"]
 		
 		custom_reload_end()
-		weapon_behavior.custom_reload_end()
 		
 		is_reloading = false
 
