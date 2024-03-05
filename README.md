@@ -40,6 +40,12 @@
   6. Attach the ressource to the used GunComponent2D. <br>
   7. Connect the GunComponent2D's commands through code. <br>
 </p>
+<br>
+
+<h3>Important Considerations</h3>
+<p>Damage is assigned to a weapon via an <i>AttackInstance</i> ressource, this is a standard in my games. Although I would recommend adapting to this standard, it can be removed without issue.</p>
+<br>
+<p>Projectiles are recomended to inherit from the <i>Projectile</i> class defined in <i>projectile.gd</i>, this allows the WeaponBehaviour of the gun it was shot from to be attached to it. Allowing for range, damage, and other factors to be calculated</p>
 
 <br>
 <h2>Documentation</h2>
@@ -73,3 +79,10 @@
 <h4>custom_process(_delta: float):</h4>
 <p>Empty function, meant to include code when extending GunComponend2D. Called by _process()</p>
 <br>
+<br>
+
+<h3>WeaponBehaviour Functions:</h3>
+<h4>shoot(_origin: Node2D, _projectile_position: Vector2, _projectile_rotation: float):</h4>
+<p>Shoots the weapon at the assigned position and rotation, in the same scene as _origin.</p>
+<h4>spawn_projectile(origin: Node2D, projectile_position: Vector2, projectile_rotation: float):</h4>
+<p>Spawns the weapon behaviour's assigned projectile.</p>
