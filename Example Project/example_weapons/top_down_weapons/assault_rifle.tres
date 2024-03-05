@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="TopDownWeaponBehavior" load_steps=4 format=3 uid="uid://sryn45h64n1b"]
 
-[ext_resource type="Script" path="res://Modular-Weapon-Manager/prebuilt_weapons_types/top_down_weapon/behaviour/top_down_behavior.gd" id="1_3d7yr"]
-[ext_resource type="PackedScene" uid="uid://rohwjlxdmef2" path="res://basic_bullet/projectile.tscn" id="1_ww675"]
-[ext_resource type="SpriteFrames" uid="uid://dd255byaahgir" path="res://assets/assault_rifle.tres" id="3_8t78y"]
+[ext_resource type="PackedScene" uid="uid://rohwjlxdmef2" path="res://scenes_and_assets/basic_bullet/projectile.tscn" id="1_y82g2"]
+[ext_resource type="Script" path="res://Modular-Gun-Manager/prebuilt_weapons_types/top_down_weapon/behaviour/top_down_behavior.gd" id="2_ydkbc"]
+[ext_resource type="SpriteFrames" uid="uid://dd255byaahgir" path="res://scenes_and_assets/assets/assault_rifle.tres" id="3_8t78y"]
 
 [resource]
-script = ExtResource("1_3d7yr")
+script = ExtResource("2_ydkbc")
 weapon_sprite = ExtResource("3_8t78y")
 animate_sprite_actions = true
 auto_flip_sprite = true
@@ -17,10 +17,12 @@ recoil = 0.0
 ammo_type = "light"
 clip_size = 20
 reload_time = 1.5
-projectile_scene = ExtResource("1_ww675")
+projectile_scene = ExtResource("1_y82g2")
 projectile_scale = 1.0
 projectile_speed = 75000.0
 projectile_range = 100000.0
 consistent_spread = false
 spread_range = 5.0
 projectile_quantity = 1
+burst_amount = 1
+burst_interval = 0.0

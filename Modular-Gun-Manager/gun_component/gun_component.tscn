@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmygasw6p144p"]
+
+[ext_resource type="Script" path="res://Modular-Gun-Manager/gun_component/gun_component.gd" id="1_e141f"]
+
+[node name="GunComponent2D" type="Node2D"]
+script = ExtResource("1_e141f")

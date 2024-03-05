@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="TopDownWeaponBehavior" load_steps=4 format=3 uid="uid://b7036d18pvq5h"]
+
+[ext_resource type="PackedScene" uid="uid://rohwjlxdmef2" path="res://scenes_and_assets/basic_bullet/projectile.tscn" id="1_42xmj"]
+[ext_resource type="Script" path="res://Modular-Gun-Manager/prebuilt_weapons_types/top_down_weapon/behaviour/top_down_behavior.gd" id="2_ymw2j"]
+[ext_resource type="SpriteFrames" uid="uid://dd255byaahgir" path="res://scenes_and_assets/assets/assault_rifle.tres" id="3_64bsc"]
+
+[resource]
+script = ExtResource("2_ymw2j")
+weapon_sprite = ExtResource("3_64bsc")
+animate_sprite_actions = true
+auto_flip_sprite = true
+sparks_enabled = true
+sparks_modulate = Color(0.988, 0.749, 0.333, 1)
+weapon_name = "burst_rifle"
+firerate = 0.8
+recoil = 0.0
+ammo_type = "light"
+clip_size = 6
+reload_time = 1.2
+projectile_scene = ExtResource("1_42xmj")
+projectile_scale = 1.0
+projectile_speed = 75000.0
+projectile_range = 100000.0
+consistent_spread = true
+spread_range = 30.0
+projectile_quantity = 3
+burst_amount = 1
+burst_interval = 0.0
