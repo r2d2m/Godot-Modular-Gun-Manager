@@ -41,3 +41,35 @@
   7. Connect the GunComponent2D's commands through code. <br>
 </p>
 
+<br>
+<h2>Documentation</h2>
+<br>
+<h3>GunComponent2D Functions:</h3>
+<h4>shoot_weapon():</h4>
+<p>Called externally when wanting to make the attached weapon fire.</p>
+<h4>reload_weapon():</h4>
+<p>Called externally when wanting to reload the attached weapon.</p>
+<h4>load_weapon(new_weapon: WeaponBehavior):</h4>
+<p>Called externally when wanting to replace the attached weapon through code.</p>
+<h4>get_reload_info(ammo_in_clip: int, max_ammo_in_clip: int, ammo_stocked: int):</h4>
+<p>Takes the inputed numbers and determines how much ammo is reloaded. Called by reload_weapon().</p>
+<br>
+<h4>custom_shoot_weapon():</h4>
+<p>Empty function, meant to include code when extending GunComponend2D. Called by shoot_weapon()</p>
+<h4>custom_shoot_failed():</h4>
+<p>Empty function, meant to include code when extending GunComponend2D. Called when the weapon is attempted to be shot, but lacks ammo.</p>
+<h4>custom_reload_begin():<h4>
+<p>Empty function, meant to include code when extending GunComponend2D. Called at the beginning of a reload.</p>
+<h4>custom_reload_end():</h4>
+<p>Empty function, meant to include code when extending GunComponend2D. Called on reload completion.</p>
+<h4>custom_reload_failed():</h4>
+<p>Empty function, meant to include code when extending GunComponend2D. Called when a reload is attempted, but lacks ammo.</p>
+<h4>custom_load_weapon():</h4>
+<p>Empty function, meant to include code when extending GunComponend2D. Called by load_weapon, after the previous weapon had been replaced by the new weapon.</p>
+<h4>custom_destroy_weapon():</h4>
+<p>Empty function, meant to include code when extending GunComponend2D. Called by load_weapon, before the previous weapon had been replaced by the new weapon.</p>
+<h4>custom_ready():</h4>  
+<p>Empty function, meant to include code when extending GunComponend2D. Called by _ready()</p>
+<h4>custom_process(_delta: float):</h4>
+<p>Empty function, meant to include code when extending GunComponend2D. Called by _process()</p>
+<br>
