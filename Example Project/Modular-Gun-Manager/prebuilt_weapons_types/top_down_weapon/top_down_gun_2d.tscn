@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://wum0cxtnqot2"]
 
-[ext_resource type="Script" path="res://Modular-Gun-Manager/prebuilt_weapons_types/top_down_weapon/component/top_down_gun_2d.gd" id="1_vwas1"]
+[ext_resource type="Script" path="res://Modular-Gun-Manager/prebuilt_weapons_types/top_down_weapon/top_down_gun_2d.gd" id="1_vwas1"]
 [ext_resource type="SpriteFrames" uid="uid://dd255byaahgir" path="res://scenes_and_assets/assets/assault_rifle.tres" id="2_06t7n"]
 
 [sub_resource type="Animation" id="Animation_ts7cs"]

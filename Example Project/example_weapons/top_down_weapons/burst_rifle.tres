@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="TopDownWeaponBehavior" load_steps=4 format=3 uid="uid://dd7c4rdegfnv2"]
 
 [ext_resource type="PackedScene" uid="uid://rohwjlxdmef2" path="res://scenes_and_assets/basic_bullet/projectile.tscn" id="1_b26vl"]
-[ext_resource type="Script" path="res://Modular-Gun-Manager/prebuilt_weapons_types/top_down_weapon/behaviour/top_down_behavior.gd" id="2_8iolt"]
+[ext_resource type="Script" path="res://Modular-Gun-Manager/prebuilt_weapons_types/top_down_weapon/top_down_behavior.gd" id="2_8iolt"]
 [ext_resource type="SpriteFrames" uid="uid://dd255byaahgir" path="res://scenes_and_assets/assets/assault_rifle.tres" id="3_e3rg7"]
 
 [resource]

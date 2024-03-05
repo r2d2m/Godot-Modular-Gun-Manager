@@ -28,6 +28,7 @@ func custom_shoot():
 	if weapon_behavior is TopDownWeaponBehavior:
 		
 		if weapon_behavior.sparks_enabled:
+			particles.show()
 			particles.restart()
 		
 		if weapon_behavior.animate_sprite_actions:
@@ -35,6 +36,7 @@ func custom_shoot():
 			animator.play("fire")
 
 func custom_reload_begin():
+	particles.hide()
 	animator.stop()
 	animator.play("reload_start")
 
